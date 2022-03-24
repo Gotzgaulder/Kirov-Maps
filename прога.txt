@@ -1,0 +1,21 @@
+//Формируем строку для добавления в таблицу.
+object[] dr;
+for (int i = 0; i < nodes.Count; i++)
+{
+//Указываем что массив будет состоять из
+//восьми значений.
+dr = new object[8];
+//Номер шага.
+dr[0] = i;
+//Получение координат начала отрезка.
+dr[1] = xmldoc.SelectNodes("//start_location").Item(i).SelectNodes("lat").Item(0).InnerText.ToString();
+dr[2] = xmldoc.SelectNodes("//start_location").Item(i).SelectNodes("lng").Item(0).InnerText.ToString();
+//Получение координат конца отрезка.
+dr[3] = xmldoc.SelectNodes("//end_location").Item(i).SelectNodes("lat").Item(0).InnerText.ToString();
+dr[4] = xmldoc.SelectNodes("//end_location").Item(i).SelectNodes("lng").Item(0).InnerText.ToString();
+//Получение времени необходимого для прохождения этого отрезка.
+dr[5] = xmldoc.SelectNodes("//duration").Item(i).SelectNodes("text").Item(0).InnerText.ToString();
+//Получение расстояния, охватываемое этим отрезком.
+dr[6] = xmldoc.SelectNodes("//distance").Item(i).SelectNodes("text").Item(0).InnerText.ToString();
+//Получение инструкций для этого шага, представленные в виде текстовой строки HTML.
+dr[7] = HtmlToPlainText(xmldoc.SelectNodes("//html_instructions").Item(i).InnerText.ToString());
